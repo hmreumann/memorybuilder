@@ -5,11 +5,19 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-jet-welcome />
-            </div>
+    <div class="md:flex md:h-screen">
+        <div class="w-full md:w-64 p-6 bg-blue-200 border-r  border-gray-200">
+            <h6 class="font-bold">Exams</h6>
+            @forelse($exams as $exam)
+            {{$exam->title}}
+            @empty
+            Non exam yet
+            @endforelse
+            <div>New Exam</div>
+
+        </div>
+        <div class="p-6">
+            <h1 class="text-4xl font-bold mb-10">Content</h1>
         </div>
     </div>
 </x-app-layout>
