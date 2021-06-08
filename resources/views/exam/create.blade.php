@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Exam') }}
         </h2>
     </x-slot>
 
@@ -11,7 +11,7 @@
 
         </div>
         <div class="p-6">
-            <h1 class="text-4xl font-bold mb-10">Content</h1>
+            <h1 class="text-4xl font-bold mb-10">Create form</h1>
         </div>
     </div>
 </x-app-layout>
