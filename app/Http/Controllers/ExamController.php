@@ -24,7 +24,9 @@ class ExamController extends Controller
      */
     public function create()
     {
-        return view('exam.create');
+        $header = 'Create New Exam';
+        $exam = new Exam;
+        return view('exam.create')->with(['header' => $header, 'exam' => $exam]);
     }
 
     /**
@@ -35,7 +37,18 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|max:100',
+            'description' => 'nullable'
+        ]);
+
+        $exam = Exam::create([
+            'user_id' => auth()->user()->id,
+            'title' => $request->title,
+            'description' => $request->description
+        ]);
+
+        return redirect(route('exams.show', ['exam' => $exam]));
     }
 
     /**
@@ -46,7 +59,7 @@ class ExamController extends Controller
      */
     public function show(Exam $exam)
     {
-        //
+        dd($exam);
     }
 
     /**
