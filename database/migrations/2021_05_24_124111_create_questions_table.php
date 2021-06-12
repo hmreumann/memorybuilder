@@ -17,7 +17,7 @@ class CreateQuestionsTable extends Migration
             $table->id();
             $table->foreignId('exam_id');
             $table->foreignId('user_id');
-            $table->text('question');
+            $table->text('statement');
             $table->text('answer');
             $table->timestamps();
         });

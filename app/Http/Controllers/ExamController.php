@@ -59,7 +59,7 @@ class ExamController extends Controller
      */
     public function show(Exam $exam)
     {
-        dd($exam);
+        return view('exam.show',compact('exam'));
     }
 
     /**

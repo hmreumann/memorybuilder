@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ExamController;
+use App\Http\Controllers\QuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,8 @@ Route::middleware('auth:sanctum', 'verified')->group(function () {
 
     // Varios Resources
     Route::resources([
-        'exams' => ExamController::class
+        'exams' => ExamController::class,
+        'questions' => QuestionController::class,
     ]);
 
 });
