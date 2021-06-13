@@ -70,7 +70,7 @@ class ExamController extends Controller
      */
     public function edit(Exam $exam)
     {
-        //
+        dd($exam);
     }
 
     /**

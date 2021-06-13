@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\Exam;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -24,7 +25,9 @@ class QuestionController extends Controller
      */
     public function create(Request $request)
     {
-        dd($request);
+        $exam = Exam::find($request->exam_id);
+
+        return view('question.create', compact('exam'));
     }
 
     /**
@@ -35,7 +38,21 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'exam_id' => 'integer|required',
+            'statement' => 'required',
+            'content' => 'required'
+        ]);
+
+        $exam = Exam::find($request->exam_id);
+        $question = Question::create([
+            'exam_id' => $exam->id,
+            'user_id' => auth()->user()->id,
+            'statement' => $request->statement,
+            'answer' => $request->content
+        ]);
+
+        return redirect()->route('exams.show', ['exam' => $exam]);
     }
 
     /**
