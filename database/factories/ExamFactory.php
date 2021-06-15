@@ -22,7 +22,8 @@ class ExamFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->text(50),
+            'description' => $this->faker->text(200),
         ];
     }
 }

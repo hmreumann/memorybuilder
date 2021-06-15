@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Test;
 use Illuminate\Http\Request;
+use App\Models\Exam;
 
 class TestController extends Controller
 {
@@ -22,9 +23,15 @@ class TestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Exam $exam)
     {
-        //
+        
+        $test = Test::create([
+            'exam_id' => $exam->id,
+            'user_id' => auth()->user()->id
+        ]);
+
+        return redirect()->route('tests.show',$test);
     }
 
     /**

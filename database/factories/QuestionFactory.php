@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Question;
+use App\Models\User;
+use App\Models\Exam;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class QuestionFactory extends Factory
@@ -22,7 +24,10 @@ class QuestionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => User::factory(),
+            'exam_id' => Exam::factory(),
+            'statement' => $this->faker->text(50),
+            'answer' => $this->faker->text(500),
         ];
     }
 }

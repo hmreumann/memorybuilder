@@ -1,5 +1,26 @@
 <div>
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+        <div class="flex">
+            <div class="flex-1">
+                <div>
+                    <div class="text-xs text-gray-500">Examenes actuales:</div>
+                    <div class="flex flex-col">
+                        @forelse($exam->tests->where('user_id',auth()->user()->id) as $test)
+                        <div>
+                        <a href="{{route('tests.show',$test)}}" class="text-blue-500 hover:text-blue-700">{{ $test->updated_at->format('d-m-Y') }}</a>
+                        </div>
+                        @empty
+                        Not yet tested
+                        @endforelse
+
+                    </div>
+                </div>
+            </div>
+            <div class="flex-1 text-right">
+                <a href="{{ route('tests.create',['exam'=>$exam]) }}" class="text-blue-500 hover:text-blue-700">Start a New Test</a>
+            </div>
+        </div>
+        <x-jet-section-border />
         <div class="flex items-center">
             <div class="flex-grow">
                 <div>

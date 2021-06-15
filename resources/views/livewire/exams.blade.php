@@ -1,7 +1,7 @@
 <div>
     <h6 class="text-xs text-gray-600 mb-2">Exams</h6>
     @forelse($exams as $exam)
-    <a href="{{route('exams.show',['exam'=>$exam])}}">{{$exam->title}}</a>
+    <a href="{{route('exams.show',['exam'=>$exam])}}">{{$exam->title}}</a><br>
     @empty
     Non exam yet
     @endforelse

@@ -17,7 +17,7 @@ class CreateTestsTable extends Migration
             $table->id();
             $table->foreignId('exam_id');
             $table->foreignId('user_id');
-            $table->dateTime('goal_date');
+            $table->dateTime('goal_date')->nullable();
             $table->timestamps();
         });
     }

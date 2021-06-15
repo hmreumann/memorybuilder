@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\TestController;
+use App\Http\Livewire\ShowTest;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +35,6 @@ Route::middleware('auth:sanctum', 'verified')->group(function () {
         'questions' => QuestionController::class,
     ]);
 
+    Route::get('/test/create/{exam}', [TestController::class, 'create'])->name('tests.create');
+    Route::get('/test/{test}', ShowTest::class)->name('tests.show');
 });
