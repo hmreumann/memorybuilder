@@ -20,4 +20,9 @@ class Test extends Model
     {
         return $this->belongsTo(Exam::class);
     }
+
+    public function results()
+    {
+        return $this->hasMany(Result::class);
+    }
 }

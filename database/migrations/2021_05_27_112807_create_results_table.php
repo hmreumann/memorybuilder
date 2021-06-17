@@ -15,7 +15,7 @@ class CreateResultsTable extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('exam_id');
+            $table->foreignId('test_id');
             $table->foreignId('user_id');
             $table->foreignId('question_id');
             $table->string('result');

@@ -9,16 +9,16 @@ class Result extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['result'];
+    protected $fillable = ['test_id','user_id','question_id','result'];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function exam()
+    public function test()
     {
-        return $this->belongsTo(Exam::class);
+        return $this->belongsTo(Test::class);
     }
 
     public function question()

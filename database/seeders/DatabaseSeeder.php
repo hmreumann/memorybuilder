@@ -26,7 +26,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $exam = Exam::factory()->count(2)
-        ->for($user)->hasQuestions(10)
+        ->for($user)->hasQuestions(10, [
+            'user_id' => $user->id
+        ])
         ->create();
 
     }
