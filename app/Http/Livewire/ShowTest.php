@@ -50,6 +50,8 @@ class ShowTest extends Component
         {
             $this->questions = $this->questions->whereNotIn('id',$this->selected->id);
             $this->resultsCorrect->push($this->selected->id);
+            $this->test->correct_answers = $this->resultsCorrect->count();
+            $this->test->save();
         }
 
         $this->newSelected();

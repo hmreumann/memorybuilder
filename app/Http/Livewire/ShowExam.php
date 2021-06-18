@@ -7,6 +7,16 @@ use Livewire\Component;
 class ShowExam extends Component
 {
     public $exam;
+    public $test;
+    public $finishedTest = false;
+
+    public function mount(){
+        $this->test = $this->exam->tests->where('user_id',auth()->user()->id)->sortByDesc('updated_at')->first();
+        
+        if($this->exam->questions()->count() == $this->test->correct_answers){
+            $this->finishedTest = true;
+        }
+    }
     
     public function render()
     {

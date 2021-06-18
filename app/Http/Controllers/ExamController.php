@@ -70,7 +70,8 @@ class ExamController extends Controller
      */
     public function edit(Exam $exam)
     {
-        dd($exam);
+        $header = "Edit Exam";
+        return view('exam.edit',compact('exam','header'));
     }
 
     /**
@@ -82,7 +83,17 @@ class ExamController extends Controller
      */
     public function update(Request $request, Exam $exam)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|max:100',
+            'description' => 'nullable'
+        ]);
+
+        $exam->update([
+            'title' => $request->title,
+            'description' => $request->description
+        ]);
+
+        return redirect(route('exams.show', ['exam' => $exam]));
     }
 
     /**
