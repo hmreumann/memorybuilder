@@ -373,3 +373,15 @@ trix-editor .attachment__metadata {
     .trix-content .attachment-gallery.attachment-gallery--2 .attachment, .trix-content .attachment-gallery.attachment-gallery--4 .attachment {
       flex-basis: 50%;
       max-width: 50%; }
+    .trix-content ol li {
+        list-style: decimal;
+        margin-left: 1em; }
+    .trix-content ul li {
+        list-style: disc;
+        margin-left: 1em; }
+    .trix-content a {
+      color: #3b82f6; }
+      .trix-content a:hover {
+        color: #1d4ed8; 
+        cursor: pointer;
+      }

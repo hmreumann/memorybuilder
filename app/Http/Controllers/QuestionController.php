@@ -74,7 +74,8 @@ class QuestionController extends Controller
      */
     public function edit(Question $question)
     {
-        //
+        
+        return view('question.edit', compact('question'));
     }
 
     /**
@@ -86,7 +87,17 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Question $question)
     {
-        //
+        $request->validate([
+            'statement' => 'required',
+            'content' => 'required'
+        ]);
+
+        $question->update([
+            'statement' => $request->statement,
+            'answer' => $request->content
+        ]);
+
+        return redirect()->route('exams.show', ['exam' => $question->exam_id]);
     }
 
     /**

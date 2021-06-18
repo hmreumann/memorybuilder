@@ -5,10 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="md:flex md:h-screen">
-        <div class="w-full md:w-64 p-6 bg-blue-200 border-r  border-gray-200">
-            @livewire('exams')
-        </div>
+    <div class="flex flex-col justify-center">
 
         <div class="w-full sm:p-6">
             <form method="POST" action="{{ route('exams.update',$exam) }}" class="grid grid-cols-6 gap-6 ">
@@ -20,13 +17,13 @@
                         <div class="">
                             <x-jet-label for="title" value="{{ __('Title') }}" />
                             <x-jet-input id="title" class="block mt-1 w-full" type="text" name="title" value="{{ old('title') ?? $exam->title }}" required autofocus />
-                            <x-jet-input-error for="title" class="mt-2"/>
+                            <x-jet-input-error for="title" class="mt-2" />
                         </div>
 
                         <div class="mt-4">
                             <x-jet-label for="description" value="{{ __('Description') }}" />
                             <x-jet-input id="description" class="block mt-1 w-full" type="text" name="description" value="{{ old('description') ?? $exam->description }}" autofocus />
-                            <x-jet-input-error for="description" class="mt-2"/>
+                            <x-jet-input-error for="description" class="mt-2" />
                         </div>
                     </div>
 
@@ -39,6 +36,9 @@
                 </div>
 
             </form>
+        </div>
+        <div class="flex justify-center">
+            <livewire:share-exam :exam="$exam" />
         </div>
     </div>
 </x-app-layout>

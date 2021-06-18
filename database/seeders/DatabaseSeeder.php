@@ -31,5 +31,15 @@ class DatabaseSeeder extends Seeder
         ])
         ->create();
 
+        $users = User::factory()->count(100)->create();
+        
+        $exam = Exam::factory()
+        ->for($user)->hasQuestions(10, [
+            'user_id' => $users->first()->id
+        ])
+        ->create();
+
+        $exam->sharedUsers()->attach($user->id);
+
     }
 }

@@ -79,4 +79,8 @@ class User extends Authenticatable
         return $this->hasMany(Result::class);
     }
 
+    public function sharedExams()
+    {
+        return $this->belongsToMany(Exam::class);
+    }
 }
