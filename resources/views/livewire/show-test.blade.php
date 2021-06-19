@@ -32,7 +32,7 @@
         </div>
         <div class="{{ $showAnswer ? '' : 'hidden' }} space-y-4 bg-white rounded shadow-sm p-2 sm:p-10 mt-6">
             <div class="text-xs text-gray-600">Answer:</div>
-            <div>{!! $selected->answer !!}</div>
+            <div class="trix-content">{!! $selected->answer !!}</div>
             <div class="flex p-4 space-x-10">
                 <div wire:click="result('correct')" class="flex-1 text-center p-2 sm:p-4 rounded text-white bg-green-500 hover:bg-green-600 cursor-pointer">Correct</div>
                 <div wire:click="result('notyetmemorized')" class="flex-1 text-center p-2 sm:p-4 rounded text-white bg-blue-500 hover:bg-blue-600 cursor-pointer">Not Yet Memorized</div>
