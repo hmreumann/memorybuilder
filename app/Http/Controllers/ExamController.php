@@ -7,16 +7,7 @@ use Illuminate\Http\Request;
 
 class ExamController extends Controller
 {
-    /**
-     * Create the controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->authorizeResource(Exam::class, 'exam');
-    }
-
+    
     /**
      * Display a listing of the resource.
      *
@@ -69,6 +60,7 @@ class ExamController extends Controller
      */
     public function show(Exam $exam)
     {
+        $this->authorize('view',$exam);
         return view('exam.show',compact('exam'));
     }
 
@@ -80,6 +72,8 @@ class ExamController extends Controller
      */
     public function edit(Exam $exam)
     {
+        $this->authorize('update',$exam);
+
         $header = "Edit Exam";
         return view('exam.edit',compact('exam','header'));
     }
@@ -93,6 +87,8 @@ class ExamController extends Controller
      */
     public function update(Request $request, Exam $exam)
     {
+        $this->authorize('update',$exam);
+
         $this->validate($request, [
             'title' => 'required|max:100',
             'description' => 'nullable'
