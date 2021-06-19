@@ -2,12 +2,16 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
 use App\Models\Result;
 use Livewire\Component;
 use App\Models\Test;
 
 class ShowTest extends Component
 {
+    use AuthorizesRequests;
+
     public Test $test;
     
     public $resultsCorrect;
@@ -18,6 +22,8 @@ class ShowTest extends Component
 
     public function mount()
     {
+        $this->authorize('view', $this->test);
+
         $this->questions = $this->test->exam->questions;
         
         $this->resultsCorrect = $this->test->results->where('result','correct')->pluck('question_id')->unique()->flatten();
@@ -39,6 +45,8 @@ class ShowTest extends Component
 
     public function result($result)
     {
+        $this->authorize('update', $this->test);
+
         Result::create([
             'test_id' => $this->test->id,
             'user_id' => auth()->user()->id,

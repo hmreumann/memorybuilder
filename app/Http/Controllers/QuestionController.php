@@ -25,9 +25,13 @@ class QuestionController extends Controller
      */
     public function create(Request $request)
     {
+
         $exam = Exam::find($request->exam_id);
 
+        $this->authorize('update', $exam);
+
         return view('question.create', compact('exam'));
+
     }
 
     /**
@@ -45,6 +49,9 @@ class QuestionController extends Controller
         ]);
 
         $exam = Exam::find($request->exam_id);
+
+        $this->authorize('update', $exam);
+
         $question = Question::create([
             'exam_id' => $exam->id,
             'user_id' => auth()->user()->id,
@@ -74,6 +81,7 @@ class QuestionController extends Controller
      */
     public function edit(Question $question)
     {
+        $this->authorize('update', $question->exam);
         
         return view('question.edit', compact('question'));
     }
@@ -87,6 +95,8 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Question $question)
     {
+        $this->authorize('update', $question->exam);
+
         $request->validate([
             'statement' => 'required',
             'content' => 'required'

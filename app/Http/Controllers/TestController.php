@@ -8,6 +8,7 @@ use App\Models\Exam;
 
 class TestController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -25,6 +26,7 @@ class TestController extends Controller
      */
     public function create(Exam $exam)
     {
+        $this->authorize('view', $exam);
         
         $test = Test::create([
             'exam_id' => $exam->id,
