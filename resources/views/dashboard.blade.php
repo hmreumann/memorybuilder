@@ -8,10 +8,7 @@
     <div class="md:flex md:h-screen">
         <div class="w-full md:w-64 p-6 bg-blue-200 border-r  border-gray-200">
             @livewire('exams')
-
         </div>
-        <div class="p-6">
-            <h1 class="text-4xl font-bold mb-10">Content</h1>
-        </div>
+        
     </div>
 </x-app-layout>

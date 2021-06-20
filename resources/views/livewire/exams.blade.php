@@ -9,11 +9,6 @@
         Non exam yet
         @endforelse
     </ul>
-    <div class="hover:text-blue-700 text-blue-500 text-xs mt-2">
-        <a href="{{ route('exams.create') }}">
-            New Exam
-        </a>
-    </div>
 
     @if($sharedExams->count() > 0)
     <h6 class="text-xs text-gray-600 mt-2">Shared Withyou:</h6>
@@ -27,4 +22,9 @@
         @endforelse
     </ul>
     @endif
+    <div class="p-6 flex justify-center">
+        <a href="{{ route('exams.create') }}">
+            <div class="bg-gray-400 text-white rounded-xl hover:bg-gray-500 px-6 py-3 max-w-sm text-center text-lg">Create Questionarie</div>
+        </a>
+    </div>
 </div>
