@@ -19,7 +19,7 @@
                 <a href="{{route('tests.show',$exam->tests()->where('user_id',auth()->user()->id)->orderByDesc('updated_at')->first())}}">
                     <div>
                         Tested {{$exam->tests()->where('user_id',auth()->user()->id)->orderByDesc('updated_at')->first()->updated_at->diffForHumans()}}<br>
-                        {{$exam->tests()->where('user_id',auth()->user()->id)->orderByDesc('updated_at')->first()->results_correct / $exam->questions->count() * 100 }} % Completed
+                        {{$exam->tests()->where('user_id',auth()->user()->id)->orderByDesc('updated_at')->first()->correct_answers / $exam->questions->count() * 100 }} % Completed
                     </div>
                 </a>
 
