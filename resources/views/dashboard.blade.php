@@ -15,6 +15,9 @@
                 <div class="font-bold">
                     {{$exam->title}}
                 </div>
+                <div class="text-gray-700">
+                    Questions: {{$exam->questions->count()}}
+                </div>
                 @if($exam->tests()->where('user_id',auth()->user()->id)->orderByDesc('updated_at')->first() !== null)
                 <a href="{{route('tests.show',$exam->tests()->where('user_id',auth()->user()->id)->orderByDesc('updated_at')->first())}}">
                     <div class="text-green-500 hover:text-green-700">
