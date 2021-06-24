@@ -19,7 +19,7 @@ use App\Http\Livewire\ShowTest;
 */
 
 Route::get('/', function () {
-    return redirect()->route('dashboard');
+    return view('welcome');
 });
 
 Route::middleware('auth:sanctum', 'verified')->group(function () {
