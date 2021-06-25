@@ -1,4 +1,4 @@
-<div class="bg-white rounded p-2 mt-4 max-w-md">
+<div class="bg-white rounded p-4 mt-4 max-w-3xl w-full shadow">
     <div>
         <div class="text-sm text-gray-700">Shared with:</div>
         <div class="text-xs p-2 sm:text-sm">

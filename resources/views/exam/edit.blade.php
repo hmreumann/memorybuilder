@@ -5,9 +5,9 @@
         </h2>
     </x-slot>
 
-    <div class="flex flex-col justify-center">
+    <div class="flex flex-col justify-center w-full">
 
-        <div class="w-full sm:p-6">
+        <div class="sm:p-6">
             <form method="POST" action="{{ route('exams.update',$exam) }}" class="grid grid-cols-6 gap-6 ">
                 @method('PUT')
                 @csrf

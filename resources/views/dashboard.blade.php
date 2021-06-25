@@ -5,15 +5,17 @@
         </h2>
     </x-slot>
 
-    <div class="md:flex ">
-        <div class="w-full md:w-64 p-6 bg-blue-200 border-r  border-gray-200">
-            @livewire('exams')
+    <div class="flex flex-col justify-center">
+        <div class="px-6 pt-6 flex justify-center">
+            <a href="{{ route('exams.create') }}">
+                <div class="bg-gray-400 text-white rounded-xl hover:bg-gray-500 px-6 py-3 max-w-sm text-center text-lg">Create Questionarie</div>
+            </a>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 p-6 place-content-start">
             @forelse(auth()->user()->exams->merge(auth()->user()->sharedExams) as $exam)
             <div class="bg-white rounded p-6 shadow">
-                <div class="font-bold">
-                    {{$exam->title}}
+                <div class="font-bold hover:text-gray-700">
+                    <a href="{{ route('exams.show',$exam)}}">{{$exam->title}}</a>
                 </div>
                 <div class="text-gray-700">
                     Questions: {{$exam->questions->count()}}
@@ -39,5 +41,6 @@
             </div>
             @endforelse
         </div>
+
     </div>
 </x-app-layout>

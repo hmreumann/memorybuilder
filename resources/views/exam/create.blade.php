@@ -6,11 +6,8 @@
     </x-slot>
 
     <div class="md:flex md:h-screen">
-        <div class="w-full md:w-64 p-6 bg-blue-200 border-r  border-gray-200">
-            @livewire('exams')
-        </div>
 
-        <div class="w-full sm:p-6">
+        <div class="max-w-6xl mx-auto w-full sm:p-6">
             <form method="POST" action="{{ route('exams.store') }}" class="grid grid-cols-6 gap-6 ">
                 @csrf
 
