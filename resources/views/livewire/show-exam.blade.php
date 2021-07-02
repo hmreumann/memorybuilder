@@ -9,11 +9,13 @@
                     <x-jet-button>New Question</x-jet-button>
                 </form>
             </div>
+            @can('update',$exam)
             <div class="">
                 <a href="{{route('exams.edit',['exam'=>$exam])}}">
                     <x-icon.cog class="text-gray-600" />
                 </a>
             </div>
+            @endcan
         </div>
         <div class="px-2  sm:px-0 flex flex-row items-center ">
             <div class="flex-grow">
@@ -28,11 +30,13 @@
                 <div class="flex justify-end text-xs text-gray-500 space-x-3">
                     <div class="">{{$question->user->name}}</div>
                     <div>Last Update: {{$question->updated_at}}</div>
+                    @can('update',$exam)
                     <div class="text-blue-400 hover:text-blue-700">
                         <a href="{{route('questions.edit',['question'=>$question])}}">
                             <x-icon.edit />
                         </a>
                     </div>
+                    @endcan
                 </div>
             </div>
             @empty

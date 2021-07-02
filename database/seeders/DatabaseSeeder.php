@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
         $user = User::create([
             'name' => 'Admin User',
             'email' => 'admin@user.com',    
-            'password' => Hash::make('password')
+            'password' => Hash::make('password'),
+            'email_verified_at' => now()
         ]);
 
         $exam = Exam::factory()->count(2)

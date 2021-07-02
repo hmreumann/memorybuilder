@@ -21,8 +21,13 @@
             </div>
         </div>
         @if($testCompleted == false)
-        <div class="mt-4 bg-white rounded shadow-sm p-2 sm:p-10">
-            <div class="text-xs text-gray-600">Statement:</div>
+        <div class="mt-4 bg-white rounded md:rounded-lg shadow p-2 sm:p-6">
+            <div class="flex items-center">
+            <div class="flex-grow text-xs text-gray-600">Statement:</div>
+            @can('update', $selected->exam)
+            <div><a href="{{route('questions.edit',$selected)}}"><x-icon.edit /></a></div>
+            @endcan
+            </div>
             <div class="font-bold text-gray-800">
                 {!! $selected->statement !!}
             </div>
@@ -39,7 +44,8 @@
             </div>
         </div>
         @else
-        <div class="mw-full text-green-700 font-bold text-center p-20">Congratulations, you've memorized all the answers.</div>
+        <div class="mw-full text-green-700 font-bold text-center p-20">Congratulations, you've memorized all the answers.<br><a href="{{route('tests.create', $test->exam)}}"><span class="text-gray-600 hover:bg-gray-800">Start it again</span></a></div>
+        <div class=""></div>
         @endif
     </div>
 </div>
