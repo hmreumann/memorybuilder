@@ -18,6 +18,7 @@
             @endcan
         </div>
         <div class="text-center mb-3">
+            @if($exam->tests()->where('user_id',auth()->user()->id)->orderByDesc('updated_at')->first() !== null)
             <a href="{{route('tests.show',$exam->tests()->where('user_id',auth()->user()->id)->orderByDesc('updated_at')->first())}}">
                 <div class="text-green-500 hover:text-green-700">
                     Tested {{$exam->tests()->where('user_id',auth()->user()->id)->orderByDesc('updated_at')->first()->updated_at->diffForHumans()}}<br>
@@ -25,6 +26,12 @@
                 </div>
             </a>
             <a href="{{route('tests.create',$exam)}}" class="text-gray-600 hover:text-gray-800">Start new test</a>
+            @else
+            <div class="text-green-500 hover:text-green-700">
+                Not Yet Tested<br>
+                <a href="{{route('tests.create',$exam)}}">Test now</a>
+            </div>
+            @endif
         </div>
         <div class="px-2  sm:px-0 flex flex-row items-center ">
             <div class="flex-grow">
