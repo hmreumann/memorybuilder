@@ -17,6 +17,15 @@
             </div>
             @endcan
         </div>
+        <div class="text-center mb-3">
+            <a href="{{route('tests.show',$exam->tests()->where('user_id',auth()->user()->id)->orderByDesc('updated_at')->first())}}">
+                <div class="text-green-500 hover:text-green-700">
+                    Tested {{$exam->tests()->where('user_id',auth()->user()->id)->orderByDesc('updated_at')->first()->updated_at->diffForHumans()}}<br>
+                    {{round($exam->tests()->where('user_id',auth()->user()->id)->orderByDesc('updated_at')->first()->correct_answers / $exam->questions->count() * 100) }} % Completed
+                </div>
+            </a>
+            <a href="{{route('tests.create',$exam)}}" class="text-gray-600 hover:text-gray-800">Start new test</a>
+        </div>
         <div class="px-2  sm:px-0 flex flex-row items-center ">
             <div class="flex-grow">
                 <div class="text-sm text-gray-500">Description:<br>{{$exam->description}}</div>

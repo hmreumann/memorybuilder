@@ -27,6 +27,7 @@
                         {{round($exam->tests()->where('user_id',auth()->user()->id)->orderByDesc('updated_at')->first()->correct_answers / $exam->questions->count() * 100) }} % Completed
                     </div>
                 </a>
+                <a href="{{route('tests.create',$exam)}}" class="text-gray-600 hover:text-gray-800">Start new test</a>
 
                 @else
                 <div class="text-green-500 hover:text-green-700">
