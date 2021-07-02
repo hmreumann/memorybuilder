@@ -3,13 +3,13 @@
 
         <div class="flex justify-center items-center py-4 space-x-4 sm:justify-end">
             <div class="text-sm px-2 sm:px-0"><span class="font-bold">{{$exam->questions->count()}}</span> Questions</div>
+            @can('update',$exam)
             <div>
                 <form method="GET" action="{{route('questions.create')}}">
                     <input type="hidden" name="exam_id" value="{{$exam->id}}">
                     <x-jet-button>New Question</x-jet-button>
                 </form>
             </div>
-            @can('update',$exam)
             <div class="">
                 <a href="{{route('exams.edit',['exam'=>$exam])}}">
                     <x-icon.cog class="text-gray-600" />
