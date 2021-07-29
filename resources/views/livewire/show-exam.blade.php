@@ -2,7 +2,8 @@
     <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
 
         <div class="flex justify-center items-center py-4 space-x-4 sm:justify-end">
-            <div class="text-sm px-2 sm:px-0"><span class="font-bold">{{$exam->questions->count()}}</span> Questions</div>
+            <div class="text-sm px-2 sm:px-0"><span class="font-bold">{{$exam->questions->count()}}</span> Questions
+            </div>
             @can('update',$exam)
             <div>
                 <form method="GET" action="{{route('questions.create')}}">
@@ -19,10 +20,13 @@
         </div>
         <div class="text-center mb-3">
             @if($exam->tests()->where('user_id',auth()->user()->id)->orderByDesc('updated_at')->first() !== null)
-            <a href="{{route('tests.show',$exam->tests()->where('user_id',auth()->user()->id)->orderByDesc('updated_at')->first())}}">
+            <a
+                href="{{route('tests.show',$exam->tests()->where('user_id',auth()->user()->id)->orderByDesc('updated_at')->first())}}">
                 <div class="text-green-500 hover:text-green-700">
-                    Tested {{$exam->tests()->where('user_id',auth()->user()->id)->orderByDesc('updated_at')->first()->updated_at->diffForHumans()}}<br>
-                    {{round($exam->tests()->where('user_id',auth()->user()->id)->orderByDesc('updated_at')->first()->correct_answers / $exam->questions->count() * 100) }} % Completed
+                    Tested
+                    {{$exam->tests()->where('user_id',auth()->user()->id)->orderByDesc('updated_at')->first()->updated_at->diffForHumans()}}<br>
+                    {{round($exam->tests()->where('user_id',auth()->user()->id)->orderByDesc('updated_at')->first()->correct_answers / $exam->questions->count() * 100) }}
+                    % Completed
                 </div>
             </a>
             <a href="{{route('tests.create',$exam)}}" class="text-gray-600 hover:text-gray-800">Start new test</a>
@@ -43,9 +47,13 @@
             <div class="flex flex-col mb-4 p-1 sm:p-3 bg-white rounded shadow-md">
                 <div class="font-bold">{!!$question->statement!!}</div>
                 <div class="p-4 text-sm trix-content">{!!$question->answer!!}</div>
-                <div class="flex justify-end text-xs text-gray-500 space-x-3">
+                <div class="flex justify-end text-xs text-gray-500 space-x-3 items-center">
+                    @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                    <img class="h-8 w-8 rounded-full object-cover" src="{{ $question->user->profile_photo_url }}" alt="{{ $question->user->name }}" />
+                    @else
                     <div class="">{{$question->user->name}}</div>
-                    <div>Last Update: {{$question->updated_at}}</div>
+                    @endif
+                    <div>Last Update: {{$question->updated_at->diffForHumans()}}</div>
                     @can('update',$exam)
                     <div class="text-blue-400 hover:text-blue-700">
                         <a href="{{route('questions.edit',['question'=>$question])}}">

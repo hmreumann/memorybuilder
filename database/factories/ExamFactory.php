@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Exam;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ExamFactory extends Factory
@@ -24,6 +25,7 @@ class ExamFactory extends Factory
         return [
             'title' => $this->faker->text(50),
             'description' => $this->faker->text(200),
+            'user_id' => User::first()->id,
         ];
     }
 }
