@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ExamController extends Controller
 {
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -110,6 +110,10 @@ class ExamController extends Controller
      */
     public function destroy(Exam $exam)
     {
-        //
+        $this->authorize('delete', $exam);
+
+        $exam->delete();
+
+        return redirect()->route('dashboard');
     }
 }

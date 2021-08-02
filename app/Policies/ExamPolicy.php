@@ -71,7 +71,11 @@ class ExamPolicy
      */
     public function delete(User $user, Exam $exam)
     {
-        //
+        if($user->id == $exam->user_id){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
