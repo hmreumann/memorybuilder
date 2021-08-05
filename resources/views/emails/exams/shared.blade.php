@@ -1,7 +1,7 @@
 @component('mail::message')
 # Hallo {{ $user->name }}
 
-{{ $exam->user->name }} has shared an exam with you, related to "{{ $exam->name }}".
+{{ $exam->user->name }} has shared an exam with you, related to "{{ $exam->title }}".
 
 @component('mail::button', ['url' => route('exams.show', $exam)])
 View Exam
