@@ -16,14 +16,6 @@
             <div class="bg-white rounded p-6 shadow">
                 <div class="flex font-bold hover:text-gray-700 justify-between">
                     <a href="{{ route('exams.show',$exam)}}">{{$exam->title}}</a>
-                    @can('delete',$exam)
-                    <form action="{{ route('exams.destroy',$exam) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-
-                        <button type="submit"><x-icon.trash class="text-red-500"/></button>
-                    </form>
-                    @endcan
                 </div>
                 <div class="text-gray-700">
                     Questions: {{$exam->questions->count()}}

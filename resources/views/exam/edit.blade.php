@@ -16,18 +16,21 @@
                     <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-tl-md sm:rounded-tr-md">
                         <div class="">
                             <x-jet-label for="title" value="{{ __('Title') }}" />
-                            <x-jet-input id="title" class="block mt-1 w-full" type="text" name="title" value="{{ old('title') ?? $exam->title }}" required autofocus />
+                            <x-jet-input id="title" class="block mt-1 w-full" type="text" name="title"
+                                value="{{ old('title') ?? $exam->title }}" required autofocus />
                             <x-jet-input-error for="title" class="mt-2" />
                         </div>
 
                         <div class="mt-4">
                             <x-jet-label for="description" value="{{ __('Description') }}" />
-                            <x-jet-input id="description" class="block mt-1 w-full" type="text" name="description" value="{{ old('description') ?? $exam->description }}" autofocus />
+                            <x-jet-input id="description" class="block mt-1 w-full" type="text" name="description"
+                                value="{{ old('description') ?? $exam->description }}" autofocus />
                             <x-jet-input-error for="description" class="mt-2" />
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6 shadow sm:rounded-bl-md sm:rounded-br-md">
+                    <div
+                        class="flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6 shadow sm:rounded-bl-md sm:rounded-br-md">
 
                         <x-jet-button class="">
                             {{ __('Save') }}
@@ -40,5 +43,10 @@
         <div class="flex justify-center">
             <livewire:share-exam :exam="$exam" />
         </div>
+
+        @can('delete',$exam)
+        <livewire:delete-exam-section :exam="$exam" />
+        @endcan
+
     </div>
 </x-app-layout>
