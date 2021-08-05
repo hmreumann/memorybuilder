@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\Exam;
+use App\Events\ExamShared;
 
 class ShareExam extends Component
 {
@@ -32,20 +33,21 @@ class ShareExam extends Component
                     $users->whereNotIn('id', collect($user->id));
                 }
             }
-            
+
             $this->users = $users->take(5)->get();
         }
     }
 
     public function shareWith(User $user)
     {
-        
+
         $user->sharedExams()->attach($this->exam->id);
+        ExamShared::dispatch($user, $this->exam);
         $this->searchUser = '';
         $this->sharedUsers = $this->exam->sharedUsers()->get();
         $this->users = null;
     }
-    
+
     public function stopSharingTo(User $user){
         $user->sharedExams()->detach($this->exam->id);
         $this->sharedUsers = $this->exam->sharedUsers()->get();
