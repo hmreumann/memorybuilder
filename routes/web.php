@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttachmentsController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ExamController;
@@ -38,5 +39,6 @@ Route::middleware('auth:sanctum', 'verified')->group(function () {
     Route::get('/test/create/{exam}', [TestController::class, 'create'])->name('tests.create');
     Route::get('/test/{test}', ShowTest::class)->name('tests.show');
 
-    Route::post('upload', [QuestionController::class, 'upload']);
+    Route::post('upload', [AttachmentsController::class, 'upload']);
+    Route::get('attachments/{attachemnt}', [AttachmentsController::class, 'retrieve']);
 });
