@@ -40,7 +40,6 @@ class ShareExam extends Component
 
     public function shareWith(User $user)
     {
-
         $user->sharedExams()->attach($this->exam->id);
         ExamShared::dispatch($user, $this->exam);
         $this->searchUser = '';

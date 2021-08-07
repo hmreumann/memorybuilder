@@ -101,4 +101,25 @@ class ExamPolicy
     {
         //
     }
+
+    /**
+     * Determine whether the user can permanently add questions to the Exam.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Exam  $exam
+     * @return mixed
+     */
+    public function storeQuestion(User $user, Exam $exam)
+    {
+        if($exam->user_id === $user->id){
+            return true;
+        }else{
+            foreach($user->sharedExams as $shared_exam){
+                if($shared_exam->pivot->permissions == 'contribute' && $shared_exam->id == $exam->id){
+                    return true;
+                }
+            }
+        }
+    }
+
 }

@@ -81,6 +81,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function sharedExams()
     {
-        return $this->belongsToMany(Exam::class);
+        return $this->belongsToMany(Exam::class)->withPivot('permissions');
     }
 }

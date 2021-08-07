@@ -49,7 +49,7 @@ class QuestionController extends Controller
 
         $exam = Exam::find($request->exam_id);
 
-        $this->authorize('update', $exam);
+        $this->authorize('storeQuestion', $exam);
 
         $question = Question::create([
             'exam_id' => $exam->id,
