@@ -21,6 +21,7 @@ class ShareExam extends Component
 
     public function updatedSearchUser()
     {
+        $this->sharedUsers = $this->exam->sharedUsers()->get();
 
         if ($this->searchUser == '') {
             $this->users = null;
@@ -36,12 +37,23 @@ class ShareExam extends Component
 
             $this->users = $users->take(5)->get();
         }
+
     }
 
     public function shareWith(User $user)
     {
-        $user->sharedExams()->attach($this->exam->id);
+        $user->sharedExams()->attach($this->exam->id, ['permissions' => 'read']);
         ExamShared::dispatch($user, $this->exam);
+        $this->searchUser = '';
+        $this->sharedUsers = $this->exam->sharedUsers()->get();
+        $this->users = null;
+    }
+
+    public function permissionChanged($value, User $user)
+    {
+        $user->sharedExams()->updateExistingPivot($this->exam->id, [
+            'permissions' => $value,
+        ]);
         $this->searchUser = '';
         $this->sharedUsers = $this->exam->sharedUsers()->get();
         $this->users = null;

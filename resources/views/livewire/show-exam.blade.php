@@ -4,7 +4,7 @@
         <div class="flex justify-center items-center py-4 space-x-4 sm:justify-end">
             <div class="text-sm px-2 sm:px-0"><span class="font-bold">{{$exam->questions->count()}}</span> Questions
             </div>
-            @can('update',$exam)
+            @can('storeQuestion',$exam)
             <div>
                 <form method="GET" action="{{route('questions.create')}}">
                     <input type="hidden" name="exam_id" value="{{$exam->id}}">
@@ -54,7 +54,7 @@
                     <div class="">{{$question->user->name}}</div>
                     @endif
                     <div>Last Update: {{$question->updated_at->diffForHumans()}}</div>
-                    @can('update',$exam)
+                    @can('update',$question)
                     <div class="text-blue-400 hover:text-blue-700">
                         <a href="{{route('questions.edit',['question'=>$question])}}">
                             <x-icon.edit />

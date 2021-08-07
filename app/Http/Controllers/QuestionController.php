@@ -28,7 +28,7 @@ class QuestionController extends Controller
 
         $exam = Exam::find($request->exam_id);
 
-        $this->authorize('update', $exam);
+        $this->authorize('storeQuestion', $exam);
 
         return view('question.create', compact('exam'));
     }
@@ -80,7 +80,7 @@ class QuestionController extends Controller
      */
     public function edit(Question $question)
     {
-        $this->authorize('update', $question->exam);
+        $this->authorize('update', $question);
 
         return view('question.edit', compact('question'));
     }
@@ -94,7 +94,7 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Question $question)
     {
-        $this->authorize('update', $question->exam);
+        $this->authorize('update', $question);
 
         $request->validate([
             'statement' => 'required',
