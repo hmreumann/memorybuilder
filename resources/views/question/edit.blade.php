@@ -9,7 +9,7 @@
         <form method="POST" action="{{route('questions.update', $question)}}">
         @method('PUT')
         @csrf
-        
+
             <div class="">
                 <x-jet-label for="statement" value="{{ __('Statement') }}" />
                 <x-jet-input id="statement" class="block mt-1 w-full" type="text" name="statement" value="{{ old('statement') ?? $question->statement }}" required autofocus />
@@ -26,4 +26,13 @@
             </div>
         </form>
     </div>
+
+    @push('scripts')
+    <script>
+        var action = "{{ env('APP_URL') }}"
+        var exam = {{ $exam->id }}
+    </script>
+    <script type="text/javascript" src="{{ asset('js/attachments.js') }}"></script>
+    @endpush
+
 </x-app-layout>

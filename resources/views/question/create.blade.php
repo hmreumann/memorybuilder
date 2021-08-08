@@ -25,4 +25,14 @@
             </div>
         </form>
     </div>
+
+    @push('scripts')
+    <script>
+        var action = "{{ env('APP_URL') }}"
+        var exam = {{ $exam->id }}
+    </script>
+    <script type="text/javascript" src="{{ asset('js/attachments.js') }}"></script>
+    @endpush
+
 </x-app-layout>
+

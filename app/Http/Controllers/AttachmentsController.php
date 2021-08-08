@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AttachmentRequest;
+use App\Models\Attachment;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class AttachmentsController extends Controller
 {
-    public function upload(Request $request)
+    public function upload(AttachmentRequest $request)
     {
         if ($request->hasFile('file')) {
             //get filename with extension
@@ -28,6 +30,11 @@ class AttachmentsController extends Controller
 
             // you can save image path below in database
             $path = asset('attachments/' . $filenametostore);
+
+            Attachment::create([
+                'path' => $path,
+                'exam_id' => $request->exam,
+            ]);
 
             echo $path;
         }

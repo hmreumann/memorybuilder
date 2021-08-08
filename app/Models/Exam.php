@@ -35,4 +35,9 @@ class Exam extends Model
     {
         return $this->belongsToMany(User::class)->withPivot('permissions')->withTimestamps();
     }
+
+    public function attachments()
+    {
+        return $this->hasMany(Attachment::class);
+    }
 }

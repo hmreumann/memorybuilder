@@ -33,10 +33,7 @@
     <!-- Trix -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/trix.css') }}">
     <script type="text/javascript" src="{{ asset('js/trix.js') }}"></script>
-    <script>
-        var action = "{{ env('APP_URL') }}"
-    </script>
-    <script type="text/javascript" src="{{ asset('js/attachments.js') }}"></script>
+    @stack('scripts')
 
 </head>
 

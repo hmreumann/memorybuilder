@@ -82,7 +82,9 @@ class QuestionController extends Controller
     {
         $this->authorize('update', $question);
 
-        return view('question.edit', compact('question'));
+        $exam = $question->exam;
+
+        return view('question.edit', compact('question', 'exam'));
     }
 
     /**
