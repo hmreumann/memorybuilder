@@ -8,6 +8,8 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+use function PHPUnit\Framework\isNull;
+
 class AttachmentsController extends Controller
 {
     public function upload(AttachmentRequest $request)
@@ -40,14 +42,19 @@ class AttachmentsController extends Controller
         }
     }
 
-    public function retrieve ($attachment){
+    public function view ($attachment){
+
+        $path = env('APP_URL') . 'attachments/' . $attachment;
+
+        $attach = Attachment::where('path', $path)->first();
+
+        if($attach != null){ $this->authorize('view', $attach); } else { abort(404); }
 
         try{
-
             $storagePath = Storage::disk('attachments')->path('/'.$attachment);
             return response()->file($storagePath);
-
         } catch (Exception $e){ abort(404); }
 
     }
+
 }

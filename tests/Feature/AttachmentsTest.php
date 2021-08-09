@@ -84,7 +84,10 @@ class AttachmentsTest extends TestCase
 
         Storage::disk('attachments')->assertExists($filenamestored);
 
-        $response = $this->actingAs(User::factory()->create())
+        $secondUser = User::factory()->create();
+        $exam->sharedUsers()->attach($secondUser->id, ['permissions' => 'contribute']);
+
+        $response = $this->actingAs($secondUser)
         ->get('/attachments/'.$filenamestored);
 
         $response->assertOk();
