@@ -1,5 +1,6 @@
 (function() {
     var HOST = action+"upload"; //pass the route
+    var HOSTRemove = action+"remove"; //pass the route
 
     addEventListener("trix-attachment-add", function(event) {
         if (event.attachment.file) {
@@ -61,4 +62,27 @@
 
         return '';
       }
+
+    addEventListener("trix-attachment-remove", function(event) {
+        if (event.attachment.attachment) {
+            removeFile(event.attachment.attachment.previewURL)
+        }
+    })
+
+    function removeFile(previewURL) {
+        var formData = createData(previewURL);
+        var xhr = new XMLHttpRequest();
+
+        xhr.open("POST", HOSTRemove, true);
+        xhr.setRequestHeader( 'X-CSRF-TOKEN', getMeta( 'csrf-token' ) );
+
+        xhr.send(formData)
+    }
+
+    function createData(previewURL) {
+        var data = new FormData()
+        data.append("previewURL", previewURL)
+        data.append("exam", exam)
+        return data
+    }
 })();

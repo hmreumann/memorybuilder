@@ -101,4 +101,41 @@ class AttachmentsTest extends TestCase
 
         $response->assertNotFound();
     }
+
+
+    /** @test */
+    public function an_attachment_can_be_deleted() {
+
+        $this->withoutExceptionHandling();
+
+        Storage::fake('attachments');
+        $user = User::factory()->create();
+        $exam = Exam::factory()->create();
+        $file = UploadedFile::fake()->image('photo.jpg');
+
+        $response = $this->actingAs($user)
+        ->post('/upload', [
+            'file' => $file,
+            'exam' => $exam->id,
+        ]);
+
+        //filename to store
+        $filenamestored = 'photo_' . time() . '.jpg';
+
+        Storage::disk('attachments')->assertExists($filenamestored);
+
+        $secondUser = User::factory()->create();
+        $exam->sharedUsers()->attach($secondUser->id, ['permissions' => 'contribute']);
+
+        $previewURL = Attachment::all()->first()->path;
+
+        $response = $this->actingAs($secondUser)
+        ->post('/remove',[
+            'previewURL' => $previewURL,
+            'exam' => $exam->id
+        ]);
+
+        $response->assertOk();
+        Storage::disk('attachments')->assertMissing($filenamestored);
+    }
 }

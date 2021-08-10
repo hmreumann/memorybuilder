@@ -40,5 +40,6 @@ Route::middleware('auth:sanctum', 'verified')->group(function () {
     Route::get('/test/{test}', ShowTest::class)->name('tests.show');
 
     Route::post('upload', [AttachmentsController::class, 'upload']);
+    Route::post('remove', [AttachmentsController::class, 'delete']);
     Route::get('attachments/{attachment}', [AttachmentsController::class, 'view']);
 });

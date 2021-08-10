@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AttachmentRequest;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Attachment;
 use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 use function PHPUnit\Framework\isNull;
 
@@ -54,6 +55,25 @@ class AttachmentsController extends Controller
             $storagePath = Storage::disk('attachments')->path('/'.$attachment);
             return response()->file($storagePath);
         } catch (Exception $e){ abort(404); }
+
+    }
+
+    public function delete(Request $request){
+
+        $request->validate([
+            'previewURL' => 'required',
+            'exam' => 'required',
+        ]);
+
+        $path = $request->previewURL;
+
+        $attachment = Attachment::where('path', $path)->first();
+
+        $this->authorize('delete', $attachment);
+
+        Storage::disk('attachments')->delete( Str::remove( env('APP_URL') . 'attachments/' , $path ));
+
+        return;
 
     }
 

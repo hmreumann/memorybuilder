@@ -37,4 +37,26 @@ class AttachmentPolicy
             return false;
         }
     }
+
+    /**
+     * Determine whether the user can delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Exam  $exam
+     * @return mixed
+     */
+    public function delete(User $user, Attachment $attachment)
+    {
+        if($user->id == $attachment->exam->user_id){
+            return true;
+        }elseif($attachment->exam->sharedUsers->contains($user)){
+            foreach($attachment->exam->sharedUsers as $sharedUser){
+                if($sharedUser->pivot->permissions == 'contribute'){
+                    return true;
+                }
+            }
+        }else{
+            return false;
+        }
+    }
 }
